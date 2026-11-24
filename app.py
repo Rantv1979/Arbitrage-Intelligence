@@ -299,7 +299,8 @@ with t5:
             sm = bt.groupby(["symbol", "strategy"]).agg(days_tested=("net", "count"), signal_days=("signal", "sum"), best_net=("net", "max"), avg_net=("net", "mean")).round(2).reset_index()
             st.subheader("Summary"); st.dataframe(sm, use_container_width=True, hide_index=True)
             st.write(f"Days where net edge after estimated charges was at least ₹{min_net}: **{int(bt.signal.sum())} of {len(bt)}**.")
-            st.subheader("Net edge per day (INR, one lot)"); st.line_chart(bt.pivot_table(index="date", columns=["symbol", "strategy"], values="net"))
+            pv = bt.pivot_table(index="date", columns=["symbol", "strategy"], values="net"); pv.columns = [f"{a} | {b}" for a, b in pv.columns]; pv.index = pd.to_datetime(pv.index)
+            st.subheader("Net edge per day (INR, one lot)"); st.line_chart(pv)
             sg = bt[bt.signal]
             if len(sg): st.subheader("Signal days"); st.dataframe(sg.round(2), use_container_width=True, hide_index=True)
             st.download_button("Download backtest (CSV)", bt.to_csv(index=False).encode("utf-8-sig"), "backtest.csv", "text/csv")
