@@ -208,7 +208,7 @@ if st.session_state.get("err"): st.caption(f"Last API message: {st.session_state
 
 hist = pd.read_sql("select * from trades", con); closed = hist[hist.status == "CLOSED"]; td = closed[closed.date == str(today())]
 a, b, c, d = st.columns(4)
-a.metric("Paper capital", "₹50,000"); b.metric("Available", f"₹{avail():,.0f}")
+a.metric("Paper capital", "₹100,000"); b.metric("Available", f"₹{avail():,.0f}")
 c.metric("Open positions", int((hist.status == "OPEN").sum())); d.metric("Today's net P&L", f"₹{td.pnl.sum():,.2f}", f"{len(td)} closed")
 
 t1, t2, t3, t4 = st.tabs(["Opportunities", "Open paper trades", "Trade history", "Rules"])
