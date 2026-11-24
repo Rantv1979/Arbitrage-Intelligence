@@ -5,7 +5,7 @@ import pandas as pd, streamlit as st
 from kiteconnect import KiteConnect
 from streamlit_autorefresh import st_autorefresh
 
-IST = ZoneInfo("Asia/Kolkata"); CAPITAL = 50000.0
+IST = ZoneInfo("Asia/Kolkata"); CAPITAL = 100000.0
 st.set_page_config("NSE Arbitrage Intelligence V1.0", layout="wide")
 
 # ---------- storage (SQLite; on free Streamlit Cloud it resets on restart, so download history) ----------
